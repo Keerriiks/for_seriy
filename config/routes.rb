@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "articles#index"
-
+  resources :users, only: [:show, :index]
+  resources :posts
   get "/articles", to: "articles#index"
   get "/articles/:id", to: "articles#show"
 

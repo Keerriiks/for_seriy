@@ -1,0 +1,20 @@
+<h1><%= @user.email %>'s Profile</h1>
+
+<% if user_signed_in? && current_user != @user %>
+  <% if current_user.following?(@user) %>
+    <%= button_to 'Unfollow', unfollow_user_path(@user), method: :post %>
+  <% else %>
+    <%= button_to 'Follow', follow_user_path(@user), method: :post %>
+  <% end %>
+<% end %>
+
+<h2>Posts:</h2>
+<% @posts.each do |post| %>
+  <div>
+    <p><%= post.content %></p>
+    <%= image_tag post.image.url if post.image.present? && post.image.respond_to?(:url) %>
+    <%= link_to 'View Post', post_path(post) %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', posts_path %>

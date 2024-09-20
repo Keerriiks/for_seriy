@@ -1,0 +1,18 @@
+<h1>Posts</h1>
+<h1>Welcome to our Instagram Clone</h1>
+
+<%= form_tag('/search', method: :get) do %>
+  <%= text_field_tag :query, params[:query] %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <div>
+    <h2><%= link_to post.user.email, user_path(post.user) %></h2>
+    <p><%= post.content %></p>
+    <%= image_tag post.image.url if post.image.present? && post.image.url.present? %>
+    <%= link_to 'View Post', post_path(post) %>
+  </div>
+<% end %>
+
+<%= link_to 'New Post', new_post_path if user_signed_in? %>
