@@ -1,28 +1,77 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Instagram Clone</title>
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js',
+integrity: 'sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo',
+crossorigin: 'anonymous' %>
+<%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',
+integrity: 'sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl',
+crossorigin: 'anonymous' %>
+    <title><%= content_for(:title) || "Gramchik" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
+    integrity: 'sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO',
+    crossorigin: 'anonymous', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://use.fontawesome.com/releases/v5.4.1/css/all.css',
+    integrity: 'sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz',
+    crossorigin: 'anonymous', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
+<div>
+
+</div>
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
-    <nav>
-      <%= link_to 'Home', root_path %>
-      <% if user_signed_in? %>
-        <%= link_to 'Profile', user_path(current_user) %>
-        <%= link_to 'Profile', user_path(current_user) if user_signed_in? %>
-      <% else %>
-        <%= link_to 'Log in', new_user_session_path %>
-        <%= link_to 'Sign up', new_user_registration_path %>
-      <% end %>
-    </nav>
+  <script>
+$(document).ready(function(){
+    $('.dropdown-toggle').dropdown();
+});
+</script>
+  <nav class="navbar navbar-light sticky-top bg-light">
+  <%= link_to "<i class='fab fa-instagram'></i> Gramchik".html_safe, root_path, class: "navbar-brand" %>
+      <ul class="nav ">
+          <li class="nav-item">
+              <%= button_to "Запостить", new_article_path, method: :get,
+              class: "btn btn-primary btn-md btn-success", data: { toggle: "modal",
+                target: "#exampleModal" } %>
+                     </li>
+                     <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                       <i class="fas fa-cogs"></i>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right">
+                       <a class="dropdown-item" href="#">Action</a>
+                       <a class="dropdown-item" href="#">Another action</a>
+                       <a class="dropdown-item" href="#">Something else here</a>
+                       <div class="dropdown-divider"></div>
+                       <a class="dropdown-item" href="#">Log Out</a>
+                     </div>
+                   </li>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+      </ul>
+  </nav>
 
+  <main class="container" style="min-height: 500px;">
     <%= yield %>
+  </main>
+  <footer class="container footer">
+  <nav class="navbar d-flex">
+    <ul>
+      <p>© Ruby и точка 2024</p>
+    </ul>
+  </nav>
+</footer>
   </body>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>

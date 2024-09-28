@@ -11,18 +11,10 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 # Rails app lives here
 WORKDIR /rails
 
-# Install bash
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y bash && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-
-
 # Install base packages
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl default-mysql-client libjemalloc2 libvips && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -36,11 +28,6 @@ FROM base AS build
 # Install packages needed to build gems
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential default-libmysqlclient-dev git pkg-config && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Install node
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install --no-install-recommends -y nodejs && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
@@ -57,6 +44,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
 
 
 
@@ -79,4 +67,3 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/rails", "server"]
-

@@ -46,3 +46,5 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
+# Игонрируем пользовательские настройки в VScode.
+.vscode/

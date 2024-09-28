@@ -1,5 +1,0 @@
-<h1>Post Details</h1>
-
-<p><%= @post.content %></p>
-<%= image_tag @post.image.url if @post.image.present? && @post.image.respond_to?(:url) %>
-<%= link_to 'Back', posts_path %>
