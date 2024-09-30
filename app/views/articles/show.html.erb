@@ -1,5 +1,11 @@
 <h1><%= @article.title %></h1>
 
+
+
+
+
+
+<%= image_tag @article.photo.variant(resize_to_limit: [50, 50]), class: "article-photo" %>
 <p><%= @article.body %></p>
 
 <ul>
@@ -10,8 +16,12 @@
                   } %></li>
 </ul>
 
+
+
+
+
 <h2>Comments</h2>
-<%= render @article.comments %>
+<%= render @article.comments if false %>
 
 <h2>Add a comment:</h2>
-<%= render "comments/form", article: @article %>
+ <%= render "comments/form", article: @article if false %>

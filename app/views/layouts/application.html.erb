@@ -1,6 +1,8 @@
+
 <!DOCTYPE html>
 <html>
   <head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'https://code.jquery.com/jquery-3.3.1.slim.min.js',
 integrity: 'sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo',
 crossorigin: 'anonymous' %>
@@ -42,23 +44,20 @@ $(document).ready(function(){
   <%= link_to "<i class='fab fa-instagram'></i> Gramchik".html_safe, root_path, class: "navbar-brand" %>
       <ul class="nav ">
           <li class="nav-item">
-              <%= button_to "Запостить", new_article_path, method: :get,
-              class: "btn btn-primary btn-md btn-success", data: { toggle: "modal",
-                target: "#exampleModal" } %>
-                     </li>
-                     <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
-                       <i class="fas fa-cogs"></i>
-                     </a>
-                     <div class="dropdown-menu dropdown-menu-right">
-                       <a class="dropdown-item" href="#">Action</a>
-                       <a class="dropdown-item" href="#">Another action</a>
-                       <a class="dropdown-item" href="#">Something else here</a>
-                       <div class="dropdown-divider"></div>
-                       <a class="dropdown-item" href="#">Log Out</a>
-                     </div>
-                   </li>
-
+              <%= button_to "Создать пост", new_article_path, method: :get,
+              class: "btn btn-primary btn-md btn-success", data: { toggle: "modal" } %>
+          <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+            <% if current_user&.photo.present? %>
+              <%= image_tag current_user.photo.variant(resize_to_limit: [50, 50]), class: "profile-photo" %>
+            <% end %>
+            <li><%= link_to "Мой профиль", edit_user_registration_path %></li>
+            <li><%= link_to "Выйти", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Регистрация", new_user_registration_path %></li>
+            <li><%= link_to "Войти", new_user_session_path %></li>
+          <% end %>
+          </ul>
       </ul>
   </nav>
 

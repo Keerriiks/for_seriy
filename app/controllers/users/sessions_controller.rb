@@ -8,19 +8,19 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  def create
-    super
-    if params[:user][:email] =~ /deleted_user\d+@admin.ru/
-      sign_out(current_user)
-    end
-  end
+  # def create
+  #   super
+  #   if params[:user][:email] =~ /deleted_user\d+@admin.ru/
+  #     sign_out(current_user)
+  #   end
+  # end
 
   def check_email
     if current_user.email =~ /deleted_user\d+@admin.ru/
       sign_out(current_user)
       respond_to do |format|
         format.json { render json: { status: "Ваш аккаунт удалён." } }
-        format.html 
+        format.html
       end
     end
   end

@@ -1,14 +1,17 @@
 <h1>Посты</h1>
 
-Количество постов: <%= Article.public_count %>
-
 <ul>
   <% @articles.each do |article| %>
-    <% unless article.archived? %>
       <li>
-        <%= link_to article.title, article %>
+      <% if article.photo.attached? %>
+        <%= link_to(article_path(article)) do %>
+        <%= image_tag(article.photo.variant(resize_to_limit: [300, 100])) %>
+        <span><%= article.title %></span>
+<% end %>
+      <% else %>
+        <%= link_to "Перейти к статье", article_path(article) %>
+      <% end %>
       </li>
-    <% end %>
   <% end %>
 </ul>
 

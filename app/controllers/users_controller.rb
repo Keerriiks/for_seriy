@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user!, except: [:show, :index]
+    # before_action :authenticate_user!, except: [:show, :index]
 
     def show
       @user = User.find(params[:id])
-      @posts = @user.posts.order(created_at: :desc)
     end
 
     def index
@@ -20,5 +19,11 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       current_user.unfollow(@user)
       redirect_to @user
+    end
+
+    protected
+
+    def user_params
+      params.require(:user).permit(:name, :email, :photo, :nickname)
     end
   end

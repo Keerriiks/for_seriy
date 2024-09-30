@@ -16,6 +16,12 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+.profile-photo {
+  width: 5px; /* Ширина изображения */
+  height: 5px; /* Высота изображения */
+  border-radius: 50%; /* Делаем изображение круглым */
+  margin-right: 10px; /* Отступ справа */
+}
 
 .forum_post {
     border-top: 1px solid #ccc;
