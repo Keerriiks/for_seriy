@@ -1,22 +1,26 @@
 <h1><%= @article.title %></h1>
-
-
-
-
-
-
-<%= image_tag @article.photo.variant(resize_to_limit: [50, 50]), class: "article-photo" %>
+<% if @article&.photo.present? %>
+<%= image_tag @article.photo.variant(resize_to_limit: [400, 400]), class: "article-photo" %>
+<% end %>
 <p><%= @article.body %></p>
 
+
+
+<% if @article.user.id == current_user.id %>
 <ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article), data: {
+  <li><%= link_to "Редактировать", edit_article_path(@article) %></li>
+  <li><%= link_to "Удалить", article_path(@article), data: {
                     turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
+                    turbo_confirm: "Вы уверены?"
                   } %></li>
 </ul>
+<% end %>
 
-
+<% if user_signed_in? && !current_user.subscribed_posts.include?(@article) && @article.user.id != current_user.id%>
+  <%= button_to 'Подписаться на пост', post_subscriptions_path(post_id: @article.id), method: :post %>
+<% elsif user_signed_in? && @article.user.id != current_user.id %>
+  <%= button_to 'Отписаться от поста', post_subscription_path(@article), method: :delete %>
+<% end %>
 
 
 

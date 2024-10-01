@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_30_222411) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_01_115146) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,6 +45,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_222411) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -70,6 +72,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_222411) do
     t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
+  create_table "post_subscriptions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -77,6 +86,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_30_222411) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "subscriber_id"
+    t.integer "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

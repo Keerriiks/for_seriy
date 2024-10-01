@@ -43,11 +43,11 @@ $(document).ready(function(){
   <nav class="navbar navbar-light sticky-top bg-light">
   <%= link_to "<i class='fab fa-instagram'></i> Gramchik".html_safe, root_path, class: "navbar-brand" %>
       <ul class="nav ">
+          <% if user_signed_in? %>
           <li class="nav-item">
               <%= button_to "Создать пост", new_article_path, method: :get,
               class: "btn btn-primary btn-md btn-success", data: { toggle: "modal" } %>
           <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
             <% if current_user&.photo.present? %>
               <%= image_tag current_user.photo.variant(resize_to_limit: [50, 50]), class: "profile-photo" %>
             <% end %>

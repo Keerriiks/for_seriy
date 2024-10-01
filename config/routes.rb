@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :articles
 
-
+  resources :subscriptions, only: [:create, :destroy]
+  resources :post_subscriptions, only: [:create, :destroy]
   root "articles#index"
 end

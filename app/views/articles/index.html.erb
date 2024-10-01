@@ -1,5 +1,20 @@
 <h1>Посты</h1>
 
+<%= search_form_for @q do |f| %>
+  <div class="field">
+    <%= f.label :title_cont, "Название поста" %>
+    <%= f.search_field :title_cont %>
+  </div>
+  <div class="field">
+    <%= f.label :body_cont, "Содержание поста" %>
+    <%= f.search_field :body_cont %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Поиск" %>
+  </div>
+<% end %>
+
+
 <ul>
   <% @articles.each do |article| %>
       <li>
@@ -9,7 +24,7 @@
         <span><%= article.title %></span>
 <% end %>
       <% else %>
-        <%= link_to "Перейти к статье", article_path(article) %>
+        <%= link_to article.title, article_path(article) %>
       <% end %>
       </li>
   <% end %>

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       redirect_to @user
     end
 
-    protected
+    protected 
 
     def user_params
       params.require(:user).permit(:name, :email, :photo, :nickname)

@@ -2,6 +2,8 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
+    @q = Article.ransack(params[:q])
+    @articles = @q.result(distinct: true)
   end
 
   def show
@@ -13,12 +15,11 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
-
+    @article = current_user.articles.build(article_params)
     if @article.save
-      redirect_to @article
+      redirect_to @article, notice: 'Article was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
