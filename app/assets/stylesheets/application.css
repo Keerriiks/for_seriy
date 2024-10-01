@@ -153,3 +153,54 @@
   .form-select {
     width: 100%; 
   }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  main.container {
+    flex: 1;
+  }
+footer {
+  background: #00000059;
+}
+  .footer-custom .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+  }
+  
+  .footer-custom .navbar-nav {
+    flex-direction: row;
+  }
+  
+  .nav-link {
+    font-weight: bold;
+    color: #ffffffd9;
+    display: block;
+    padding: .5rem 1rem;
+}
+ul {
+  margin-top: 10px; /* Увеличивает расстояние между элементами списка */
+  list-style: none; /* Убирает маркеры списка */
+  padding-left: 0; /* Убирает отступ слева */
+  display: flex; /* Включает Flexbox */
+  flex-direction: column; /* Выстраивает дочерние элементы в колонку */
+  align-items: center; /* Центрирует элементы по горизонтали */
+}
+
+ul li {
+
+  margin-bottom: 10px; /* Увеличивает расстояние между элементами списка */
+  border-bottom: 1px solid #ccc; /* Добавляет линию подчеркивания к каждому элементу */
+  width: 100%; /* Задает ширину для элементов списка */
+} 
+
+ul li:last-child {
+  border-bottom: none; /* Убирает подчеркивание у последнего элемента */
+}
